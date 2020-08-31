@@ -7,12 +7,12 @@ const BASEURL = "https://www.googleapis.com/books/v1/volumes?q="
 const APIKEY = process.env.GOOGLE_APIKEY || "didn't work"
 
 //search for books via google books api
-router.router("/api/books/search/")
+router.route("/api/books/search/")
   .get(BASEURL + query.title + APIKEY);
 
-// Matches with "/api/books"
+// Matches with "/api/books" 
 router.route("/")
-  .get(booksController.findAll)
+  // .get(booksController.findAll)
   .post(booksController.create);
 
 // Matches with "/api/books/:id"
