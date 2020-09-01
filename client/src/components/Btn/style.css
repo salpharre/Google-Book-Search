@@ -3,5 +3,8 @@
 } */
 
 .btnPurple {
-  color: rgb(168, 3, 168);
+  background-color: rgb(168, 3, 168);
+  border-color: rgb(168, 3, 168);
+  color: #fff;
+  margin-left: 1rem;
 }

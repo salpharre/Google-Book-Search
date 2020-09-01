@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-// import {  } from "../Btn";
 
 export function Card({ image, title, author, description, infoLink, children }) {
     return (

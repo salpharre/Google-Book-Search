@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ViewBtn, FavoriteBtn } from "../components/Btn";
+import { FavoriteBtn } from "../components/Btn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import useDebounce from "../utils/DebouncedSearch"
-import { Link } from "react-router-dom";
 import { Container } from "../components/Grid";
 import Search from "../components/Search";
 import { Card } from "../components/Card";
-import SavedBooks from "./SavedBooks";
 
 
 function SearchBooks() {
@@ -94,16 +92,9 @@ function SearchBooks() {
                 ) : (
                         <h3>No Results to Display :(</h3>
                     )}
-                {/*dynamically created cards, map out array, target volumeInfo*/}
             </Jumbotron>
         </Container>
     );
 };
 
 export default SearchBooks;
-
-/*
-                    <FavoriteBtn />
-                    <Card/>
-
-*/

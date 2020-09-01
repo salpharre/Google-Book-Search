@@ -9,12 +9,6 @@ export function DeleteBtn(props) {
   );
 }
 
-export function ViewBtn(props) {
-  return (
-    <button type="button" className="btn btn-info" {...props}>View</button>
-  );
-};
-
 export function FavoriteBtn(props) {
   return (
     <button type="button" className="btn btnPurple" {...props}>Favorite</button>

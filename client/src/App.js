@@ -1,17 +1,30 @@
 import React from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Books from "./pages/Books";
 // import Detail from "./pages/Detail";
-// import NoMatch from "./pages/NoMatch";
+import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import SearchBooks from "./pages/SearchBooks";
+import SavedBooks from "./pages/SavedBooks";
 
 function App() {
   return (
-    <div>
-      <Nav />
-      <SearchBooks />
-    </div>
+    <Router>
+      <div>
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <SearchBooks />
+          </Route>
+          <Route exact path="/books">
+            <SavedBooks />
+          </Route>
+          <Route>
+            <NoMatch />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
