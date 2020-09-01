@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { ViewBtn, FavoriteBtn } from "../components/Btn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import DebouncedSearch from "../utils/DebouncedSearch"
+import useDebounce from "../utils/DebouncedSearch"
 import { Link } from "react-router-dom";
 import { Container } from "../components/Grid";
 import Search from "../components/Search";
+import { Card } from "../components/Card";
 
 
 function SearchBooks() {
@@ -25,53 +26,41 @@ function SearchBooks() {
     };
 
     //holds the custom hook that uses the typed input and set delay amount that filters through current state array
-    // const debouncedInput = useDebounce(search, 300);
+    const debouncedInput = useDebounce(search, 300);
 
-    //The if conditional only occurs when the there is a debouncedInput, the else conditional still happens, loading the users from the api
-    // useEffect(() => {
-    //     if (debouncedInput) {
-    //         console.log(debouncedInput);
-    //         filterAPI();
-    //     } else {
-    //         loadBooks();
-    //     }
-    // }, [debouncedInput]);
-
+    //The if conditional only occurs when the there is a debouncedInput
     useEffect(() => {
-        if (!search) {
+        if (debouncedInput) {
+            console.log(debouncedInput);
+            loadBooks(debouncedInput);
+        } else {
             return;
         }
-        loadBooks(search);
-    });
+    }, [debouncedInput]);
 
-    //filter out object from api array that matches the searchedUser(typed input in search)
-    //filter from api so the user doesn't need to backspace all the way (and let state reload with all users) before changing input
-    // function filterAPI() {
-    //     API.searchBooks().then(res => {
-    //         const response = res.data.results;
-    //         const book = response.filter(name => {
-    //             const first = name.name.first.toLocaleLowerCase();
-    //             const last = name.name.last.toLocaleLowerCase();
-    //             const lowerCaseSearchedUser = searchedUser.toLocaleLowerCase();
-    //             const full = `${first} ${last}`;
-    //             const fullOriginal = `${name.name.first} ${name.name.last}`
-    //             //'includes' method compares any piece of name to string (from object) so that if user only knows a part of the book's name the api will still be called
-    //             //compares input to object whether the user types in all lower case or capitalizes the first letter
-    //             if (full.includes(lowerCaseSearchedUser)) {
-    //                 return true;
-    //             } else if (fullOriginal.includes(searchedUser)) {
-    //                 return true;
-    //             }
-    //         });
-    //      setBooks(book);
-    //     });
-    // }
+    // useEffect(() => {
+    //     if (!search) {
+    //         return;
+    //     }
+
+    // });
+
     //grabs value in input and saves it to state
     const handleInputChange = e => {
         const value = e.target.value;
         console.log(value);
         setSearch(value);
     };
+
+    // const saveBook = e => {
+    //     API.saveBook({
+    //         title: 
+    //         author: 
+    //         description: 
+    //         image: 
+    //         infoLink: 
+    //     })
+    // }
 
     return (
         <Container fluid>
@@ -85,6 +74,22 @@ function SearchBooks() {
                 />
             </Jumbotron>
             <Jumbotron>
+                {books.length ? (
+                    books.map(book => {
+                        return (
+                        <Card
+                            key={book.volumeInfo.title}
+                            image={(book.volumeInfo.imageLinks) ? (book.volumeInfo.imageLinks.thumbnail) : ("https://i.picsum.photos/id/287/200/200.jpg?hmac=kXFCSMZE2rF7NM-EFSH6c_nl5HlKQWvwCdE8JYL-YNQ")}
+                            title={book.volumeInfo.title}
+                            author={(book.volumeInfo.authors) ? (book.volumeInfo.authors[0]) : ("NA")}
+                            description={book.volumeInfo.description}
+                            infoLink={book.volumeInfo.infoLink}
+                        />
+                        )
+                    })
+                ) : (
+                        <h3>No Results to Display :(</h3>
+                    )}
                 {/*dynamically created cards, map out array, target volumeInfo*/}
             </Jumbotron>
         </Container>
@@ -92,3 +97,9 @@ function SearchBooks() {
 };
 
 export default SearchBooks;
+
+/*
+                    <FavoriteBtn />
+                    <Card/>
+
+*/

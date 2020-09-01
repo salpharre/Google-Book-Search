@@ -9,6 +9,8 @@ function Search(props) {
       className="form-control"
       onChange={props.handleInputChange}
       value={props.value}
+      type="text"
+      placeholder="Enter Search Word"
        />
     </div>
   );
