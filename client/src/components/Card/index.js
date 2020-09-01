@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 // import {  } from "../Btn";
 
-export function Card({ image, title, author, description, infoLink }) {
+export function Card({ image, title, author, description, infoLink, children }) {
     return (
         <div className="card cardParent mb-3" style="max-width: 540px;">
             <div className="row no-gutters">
@@ -15,9 +15,12 @@ export function Card({ image, title, author, description, infoLink }) {
                         <p className="card-text">{author}</p>
                         <p className="card-text">{description}</p>
                         <button type="button" className="btn btn-info">View</button>
+                        {children}
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
+//put {children} under view button and in with the other props

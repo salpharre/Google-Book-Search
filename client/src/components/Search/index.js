@@ -2,10 +2,16 @@ import React from "react";
 
 // This file exports the Input component
 
-export function Search(props) {
+function Search(props) {
   return (
     <div className="form-group">
-      <input className="form-control" {...props} />
+      <input 
+      className="form-control"
+      onChange={props.handleInputChange}
+      value={props.value}
+       />
     </div>
   );
-}
+};
+
+export default Search;

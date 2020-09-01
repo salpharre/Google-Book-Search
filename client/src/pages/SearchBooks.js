@@ -4,8 +4,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import DebouncedSearch from "../utils/DebouncedSearch"
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import { Container } from "../components/Grid";
 import Search from "../components/Search";
 
 
@@ -14,11 +13,14 @@ function SearchBooks() {
     const [search, setSearch] = useState("");
 
     function loadBooks() {
-        API.searchBooks()
+        API.searchBooks(search)
             .then(res => {
-                console.log(res);
-                console.log(res.data.items)
-            //  setBooks(res.data.results);
+                // console.log(res);
+                // console.log(res.items);
+                // console.log(res.data.items[0].volumeInfo);
+                console.log(res.data.items);
+
+                setBooks(res.data.items);
             }).catch(err => console.log(err));
     };
 
@@ -36,8 +38,11 @@ function SearchBooks() {
     // }, [debouncedInput]);
 
     useEffect(() => {
-        loadBooks();
-    })
+        if (!search) {
+            return;
+        }
+        loadBooks(search);
+    });
 
     //filter out object from api array that matches the searchedUser(typed input in search)
     //filter from api so the user doesn't need to backspace all the way (and let state reload with all users) before changing input
@@ -67,22 +72,21 @@ function SearchBooks() {
         console.log(value);
         setSearch(value);
     };
-    
+
     return (
         <Container fluid>
-            <Row>
-                <Jumbotron>
-                    <h1>Google Book Search</h1>
-                </Jumbotron>
-            </Row>
-            <Row>
-                <Jumbotron>
-                    <Search />
-                </Jumbotron>
-            </Row>
-            <Row>
-                {/*jumbotron and dynamically created cards*/}
-            </Row>
+            <Jumbotron>
+                <h1>Google Book Search</h1>
+            </Jumbotron>
+            <Jumbotron>
+                <Search
+                    handleInputChange={handleInputChange}
+                    value={search}
+                />
+            </Jumbotron>
+            <Jumbotron>
+                {/*dynamically created cards, map out array, target volumeInfo*/}
+            </Jumbotron>
         </Container>
     );
 };
