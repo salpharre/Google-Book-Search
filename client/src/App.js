@@ -9,6 +9,7 @@ import SearchBooks from "./pages/SearchedBooks";
 function App() {
   return (
     <div>
+      <Nav />
       <SearchBooks />
     </div>
   );

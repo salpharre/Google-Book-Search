@@ -1,13 +1,14 @@
 import axios from "axios";
 
-const BASEURL = "https://www.googleapis.com/books/v1/volumes?q="
-const APIKEY = process.env.GOOGLE_APIKEY || "PLACEHOLDER UNTIL AFTER COMMIT"
+//don't need apikey?
+// const BASEURL = "https://www.googleapis.com/books/v1/volumes?q="
+// const APIKEY = process.env.GOOGLE_APIKEY || "PLACEHOLDER UNTIL AFTER COMMIT"
 
 export default {
   //search books from google api 
   //TEMPORARY LOCATION UNTIL GET REACT LOOK AND API SET UP
   searchBooks: function(query) {
-    return axios.get(BASEURL + query.title + APIKEY);
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
   },
   //route to talk to backend to get to google api
   // searchBooks: function(query) {
