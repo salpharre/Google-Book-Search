@@ -10,13 +10,16 @@ const APIKEY = process.env.GOOGLE_APIKEY || "didn't work"
 // router.route("/api/books/search/")
 //   .get(BASEURL + query.title + APIKEY);
 
+//Get all books
 // Matches with "/api/books" 
 router.route("/")
+  .get(booksController.findAll);
+
+router.route("/save")
   .post(booksController.create);
 
 // Matches with "/api/books/:id"
-router
-  .route("/:id")
+router.route("/:id")
   .delete(booksController.remove);
 
 module.exports = router;

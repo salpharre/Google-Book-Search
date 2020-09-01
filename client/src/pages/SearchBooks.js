@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 import { Container } from "../components/Grid";
 import Search from "../components/Search";
 import { Card } from "../components/Card";
+import SavedBooks from "./SavedBooks";
 
 
 function SearchBooks() {
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState("");
+    // const [saved, setSaved] = useState({});
 
-    function loadBooks() {
-        API.searchBooks(search)
+    function loadBooks(input) {
+        API.searchBooks(input)
             .then(res => {
                 // console.log(res);
                 // console.log(res.items);
@@ -38,13 +40,6 @@ function SearchBooks() {
         }
     }, [debouncedInput]);
 
-    // useEffect(() => {
-    //     if (!search) {
-    //         return;
-    //     }
-
-    // });
-
     //grabs value in input and saves it to state
     const handleInputChange = e => {
         const value = e.target.value;
@@ -52,15 +47,14 @@ function SearchBooks() {
         setSearch(value);
     };
 
-    // const saveBook = e => {
-    //     API.saveBook({
-    //         title: 
-    //         author: 
-    //         description: 
-    //         image: 
-    //         infoLink: 
-    //     })
-    // }
+    function saveBook(obj) {
+        console.log(obj);
+        API.saveBook(obj)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+
+
 
     return (
         <Container fluid>
@@ -78,13 +72,23 @@ function SearchBooks() {
                     books.map(book => {
                         return (
                         <Card
-                            key={book.volumeInfo.title}
+                            key={book.id}
                             image={(book.volumeInfo.imageLinks) ? (book.volumeInfo.imageLinks.thumbnail) : ("https://i.picsum.photos/id/287/200/200.jpg?hmac=kXFCSMZE2rF7NM-EFSH6c_nl5HlKQWvwCdE8JYL-YNQ")}
                             title={book.volumeInfo.title}
                             author={(book.volumeInfo.authors) ? (book.volumeInfo.authors[0]) : ("NA")}
                             description={book.volumeInfo.description}
                             infoLink={book.volumeInfo.infoLink}
-                        />
+                        >
+                           <FavoriteBtn 
+                           onClick={() => saveBook({
+                            title: book.volumeInfo.title,
+                            author: book.volumeInfo.authors[0],
+                            description: book.volumeInfo.description,
+                            image: book.volumeInfo.imageLinks.thumbnail,
+                            infoLink: book.volumeInfo.infoLink
+                           })}
+                           /> 
+                        </Card>
                         )
                     })
                 ) : (

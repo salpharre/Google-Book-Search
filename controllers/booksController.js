@@ -11,7 +11,13 @@ module.exports = {
   },
   create: function(req, res) {
     db.Book
-      .create(req.body)
+      .create({
+        title: req.body.title,
+        author: req.body.author,
+        description: req.body.description,
+        image: req.body.image,
+        infoLink: req.body.infoLink
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

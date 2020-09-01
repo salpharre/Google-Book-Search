@@ -17,6 +17,6 @@ export function ViewBtn(props) {
 
 export function FavoriteBtn(props) {
   return (
-    <button type="button" class="btn btnPurple" {...props}>Favorite</button>
+    <button type="button" className="btn btnPurple" {...props}>Favorite</button>
   );
 }
