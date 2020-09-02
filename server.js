@@ -22,7 +22,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooksearc
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
-});
+}).then(res => console.log("connected"))
+.catch(err => console.log(err));
 
 // Start the API server
 app.listen(PORT, function() {

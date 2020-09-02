@@ -71,15 +71,18 @@ function SearchBooks() {
                             description={book.volumeInfo.description}
                             infoLink={book.volumeInfo.infoLink}
                         >
-                           <FavoriteBtn 
-                           onClick={() => saveBook({
-                            title: book.volumeInfo.title,
-                            author: book.volumeInfo.authors[0],
-                            description: book.volumeInfo.description,
-                            image: book.volumeInfo.imageLinks.thumbnail,
-                            infoLink: book.volumeInfo.infoLink
-                           })}
-                           /> 
+                        {(book.volumeInfo.authors ? (
+                            <FavoriteBtn 
+                            onClick={() => saveBook({
+                             title: book.volumeInfo.title,
+                             author: book.volumeInfo.authors[0],
+                             description: book.volumeInfo.description,
+                             image: book.volumeInfo.imageLinks.thumbnail,
+                             infoLink: book.volumeInfo.infoLink
+                            })}
+                            /> 
+                         ) : (<FavoriteBtn style={{ display: "none" }} />)
+                           )}
                         </Card>
                         )
                     })
