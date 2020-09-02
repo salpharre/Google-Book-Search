@@ -1,5 +1,5 @@
 import React from "react";
-
+//navbar, holds links to different pages
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">      

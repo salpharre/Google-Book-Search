@@ -1,6 +1,7 @@
-/* .btn-danger {
-  float: right;
-} */
+/*styles delete and favorite button*/
+.btn-danger {
+  margin-left: 1rem;
+}
 
 .btnPurple {
   background-color: rgb(168, 3, 168);

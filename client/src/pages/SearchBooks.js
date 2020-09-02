@@ -7,20 +7,15 @@ import { Container } from "../components/Grid";
 import Search from "../components/Search";
 import { Card } from "../components/Card";
 
-
+//searches for books based on word inputted in search bar
 function SearchBooks() {
     const [books, setBooks] = useState([]);
     const [search, setSearch] = useState("");
-    // const [saved, setSaved] = useState({});
 
     function loadBooks(input) {
         API.searchBooks(input)
             .then(res => {
-                // console.log(res);
-                // console.log(res.items);
-                // console.log(res.data.items[0].volumeInfo);
-                console.log(res.data.items);
-
+                // console.log(res.data.items);
                 setBooks(res.data.items);
             }).catch(err => console.log(err));
     };
@@ -28,7 +23,7 @@ function SearchBooks() {
     //holds the custom hook that uses the typed input and set delay amount that filters through current state array
     const debouncedInput = useDebounce(search, 300);
 
-    //The if conditional only occurs when the there is a debouncedInput
+    //The if conditional only occurs when the there is a debouncedInput, otherwise nothing happens
     useEffect(() => {
         if (debouncedInput) {
             console.log(debouncedInput);
@@ -44,15 +39,13 @@ function SearchBooks() {
         console.log(value);
         setSearch(value);
     };
-
+    //grabs object from array and saves it to the database
     function saveBook(obj) {
         console.log(obj);
         API.saveBook(obj)
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
-
-
 
     return (
         <Container fluid>

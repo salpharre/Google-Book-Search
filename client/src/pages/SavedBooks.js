@@ -7,14 +7,11 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Card } from "../components/Card";
 
-
+//gets books from database, saves it in state for the cards to be dynamically created
+//delete button deletes favorites using the mongodb created id
 function SavedBooks() {
 
     const [favorites, setFavorites] = useState([]);
-
-    //get all the books on initial render
-    //delete favorited book when delete button is clicked
-            //after deleting, re-render all books
 
     useEffect(() => {
         loadBooks()

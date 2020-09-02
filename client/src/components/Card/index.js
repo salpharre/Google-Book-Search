@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-
+//card that holds information from api for search page and database for favorites page
 export function Card({ image, title, author, description, infoLink, children }) {
     return (
         <div className="card cardParent mb-3">
@@ -13,7 +13,7 @@ export function Card({ image, title, author, description, infoLink, children }) 
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">Author: {author}</p>
                         <p className="card-text">{description}</p>
-                        <a href={infoLink}>
+                        <a href={infoLink} target="_blank" rel="noopener noreferrer">
                         <button type="button" className="btn btn-info">View</button>
                         </a>
                         {children}

@@ -1,5 +1,5 @@
 import React from "react";
-
+//jumbotron, holds search input, cards, header
 function Jumbotron({ children }) {
   return (
     <div className="jumbotron">
@@ -9,9 +9,3 @@ function Jumbotron({ children }) {
 }
 
 export default Jumbotron;
-
-/*
-      style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-
-
-*/
