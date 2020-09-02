@@ -6,6 +6,7 @@ import useDebounce from "../utils/DebouncedSearch"
 import { Container } from "../components/Grid";
 import Search from "../components/Search";
 import { Card } from "../components/Card";
+import axios from "axios";
 
 //searches for books based on word inputted in search bar
 function SearchBooks() {
@@ -13,9 +14,9 @@ function SearchBooks() {
     const [search, setSearch] = useState("");
 
     function loadBooks(input) {
-        API.searchBooks(input)
+        axios.get("/api/books/search/" + input)
             .then(res => {
-                // console.log(res.data.items);
+                console.log(res);
                 setBooks(res.data.items);
             }).catch(err => console.log(err));
     };

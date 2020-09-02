@@ -4,7 +4,7 @@ import "./style.css";
 //delete button
 export function DeleteBtn(props) {
   return (
-    <button type="button" class="btn btn-danger" {...props}>Delete</button>
+    <button type="button" className="btn btn-danger" {...props}>Delete</button>
   );
 }
 //favorite button
