@@ -16,9 +16,7 @@ MERN app to search and favorite books from google books api.
 
 ### Demo
 
-For [webpage]() - soon
-
-For [demo]() - soon
+For [webpage](https://google-book-search232.herokuapp.com/)
 
 ### Installation
 
