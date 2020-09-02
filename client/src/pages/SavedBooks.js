@@ -5,14 +5,35 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
+import { Card } from "../components/Card";
 
 
 function SavedBooks() {
 
-    const [favorites, setFavorites] = useState({});
+    const [favorites, setFavorites] = useState([]);
 
     //get all the books on initial render
     //delete favorited book when delete button is clicked
+            //after deleting, re-render all books
+
+    useEffect(() => {
+        loadBooks()
+    }, []);
+
+    function loadBooks() {
+        API.getBooks()
+            .then(res => {
+                console.log(res)
+                setFavorites(res.data)
+            })
+            .catch(err => console.log(err));
+    }
+
+    function deleteBook(id) {
+        API.deleteBook(id)
+            .then(res => loadBooks())
+            .catch(err => console.log(err));
+    }
 
     return (
         <Container fluid>
@@ -30,7 +51,7 @@ function SavedBooks() {
                             key={book._id}
                             image={(book.image) ? (book.image) : ("https://i.picsum.photos/id/287/200/200.jpg?hmac=kXFCSMZE2rF7NM-EFSH6c_nl5HlKQWvwCdE8JYL-YNQ")}
                             title={book.title}
-                            author={(book.author) ? (book.volumeInfo.author) : ("NA")}
+                            author={(book.author) ? (book.author) : ("NA")}
                             description={book.description}
                             infoLink={book.infoLink}
                         >

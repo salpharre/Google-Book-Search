@@ -6,7 +6,7 @@ function Nav() {
     <a className="navbar-brand" href="/">
       Search for Books
       </a>
-      <a className="navbar-brand" href="/books/:id">
+      <a className="navbar-brand" href="/books">
         Saved Books
       </a>
     </nav>
